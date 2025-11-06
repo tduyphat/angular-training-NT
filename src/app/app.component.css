@@ -1,0 +1,40 @@
+.sr-only {
+  position: absolute;
+  left: -10000px;
+}
+
+.filter {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 10px 40px 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.06);
+  color: #e8eefc;
+  font: inherit;
+  line-height: 1.2;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23c7d2fe' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 20px 20px;
+}
+
+.filter::-ms-expand {
+  display: none;
+}
+
+.filter:hover {
+  border-color: rgba(199, 210, 254, 0.5);
+}
+.filter:focus {
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+  border-color: rgba(199, 210, 254, 0.8);
+}
+
+.filter option {
+  background: #0f172a;
+  color: #e5e7eb;
+}

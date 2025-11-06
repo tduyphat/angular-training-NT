@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="card">
+    <div class="title">
+      ✅ Todo List
+      <span class="badge">localStorage • CRUD</span>
+    </div>
+
+    <div class="row" style="margin-top: 16px">
+      <input
+        class="input"
+        placeholder="Add a task..."
+        [ngModel]="newTitle()"
+        (ngModelChange)="newTitle.set($event)"
+        (keyup.enter)="add()"
+      />
+      <button class="primary" (click)="add()">Add</button>
+    </div>
+
+    <div class="row" style="margin-top: 8px">
+      <select
+        class="filter"
+        [ngModel]="filter()"
+        (ngModelChange)="filter.set($event)"
+      >
+        <option value="all">All</option>
+        <option value="active">Active</option>
+        <option value="completed">Completed</option>
+      </select>
+
+      <input
+        class="input"
+        placeholder="Search…"
+        [ngModel]="query()"
+        (ngModelChange)="query.set($event)"
+      />
+
+      <button class="ghost" (click)="clearCompleted()">
+        Clear completed ({{ completed() }})
+      </button>
+    </div>
+
+    <hr />
+
+    <div class="list">
+      <div
+        class="item"
+        *ngFor="let t of filtered(); trackBy: trackById"
+        [class.done]="t.done"
+      >
+        <input
+          type="checkbox"
+          class="checkbox"
+          [checked]="t.done"
+          (change)="toggle(t)"
+        />
+
+        <ng-container *ngIf="startEdit() !== t.id; else editTpl">
+          <div style="display: flex; flex-direction: column; gap: 4px; flex: 1">
+            <div class="title">{{ t.title }}</div>
+            <div class="meta">
+              <span class="tag">#{{ t.id.slice(0, 6) }}</span>
+              <span>• Created: {{ t.createdAt | date : "short" }}</span>
+              <span *ngIf="t.updatedAt !== t.createdAt">
+                • Updated: {{ t.updatedAt | date : "short" }}
+              </span>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="ghost" (click)="beginEdit(t)">Edit</button>
+            <button class="ghost" (click)="remove(t)">Delete</button>
+          </div>
+        </ng-container>
+
+        <ng-template #editTpl>
+          <input
+            class="edit-input"
+            [ngModel]="editText()"
+            (ngModelChange)="editText.set($event)"
+            (keyup.enter)="confirmEdit(t)"
+          />
+          <div class="actions">
+            <button class="primary" (click)="confirmEdit(t)">Save</button>
+            <button class="ghost" (click)="cancelEdit()">Cancel</button>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+    <footer>
+      <div>
+        <strong>{{ remaining() }}</strong> remaining •
+        {{ todos().length }} total
+      </div>
+    </footer>
+  </div>
+</div>
