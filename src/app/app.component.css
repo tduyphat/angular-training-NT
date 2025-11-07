@@ -8,10 +8,9 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   padding: 10px 40px 10px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.06);
-  color: #e8eefc;
+  color: var(--muted);
   font: inherit;
   line-height: 1.2;
   outline: none;
@@ -35,6 +34,5 @@
 }
 
 .filter option {
-  background: #0f172a;
-  color: #e5e7eb;
+  color: var(--muted);
 }
